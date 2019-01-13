@@ -24,6 +24,7 @@ def generate_random_route2(data,numberOfDrivers=2):
 def sym_wyz(data):
     iterations = 0
     distance,trasa = generate_random_route2(data)
+    best_distance,best_trasa =  distance,trasa
     y = [np.amax(distance)]
     t = 3000
     wsp = 0.80
@@ -41,6 +42,8 @@ def sym_wyz(data):
                     distance, trasa = distance2, trasa2
         y.append(np.amax(distance))
         t = wsp*t
+        if np.amax(best_distance)>np.amax(distance):
+            best_distance, best_trasa = distance, trasa
     prop = (time_of_testing * 60) / len(y)
     x_data = []
     for i in range(len(y)):
@@ -49,10 +52,10 @@ def sym_wyz(data):
     matplotlib.pyplot.ylabel('distance')
     matplotlib.pyplot.xlabel('time[ms]')
     print("Liczba iteracji:" + str(iterations))
-    return distance,trasa
+    return best_distance,best_trasa
 
 
-data = pd.read_csv('exp.csv',sep=";")
+data = pd.read_csv('Exp.csv',sep=";")
 np_data = np.array(data[1:-1])
 np_data_clear = np_data[:,:-2].astype(int)
 time_of_testing = 0.2 #Czas w sekundach testu

@@ -22,8 +22,8 @@ def random_search(data):
     y = [best_dist]
     act_time = time.time()
     while (time.time() < act_time + time_of_testing):
-        iterations = iterations +1
         best_dist1,trasa1 = generate_random_route(data)
+        iterations = iterations + 1
         if best_dist1 < best_dist:
              best_dist,trasa = best_dist1,trasa1
         y.append(best_dist)
@@ -42,10 +42,10 @@ def sym_wyz_swap(data):
         trasa2 = []
         trasa2 = trasa2 + trasa
         r = random.randrange(1, len(trasa)-2)
-        r1=r
-        while r==r1:
+        r1 = r
+        while r == r1:
             r1 = random.randrange(1, len(trasa) - 2)
-        trasa2[r] = trasa2[r1]
+        trasa2[r] = trasa[r1]
         trasa2[r1] = trasa[r]
         distance2 = 0
         for i in range((len(trasa) - 1)):
@@ -53,9 +53,10 @@ def sym_wyz_swap(data):
         return distance2, trasa2
     iterations = 0
     distance,trasa = generate_random_route(data)
+    best_distance, best_route = distance, trasa
     y = [distance]
-    t = 30000
-    wsp = 0.80
+    t = 10000
+    wsp = 0.99
     act_time = time.time()
     while (time.time() < act_time + time_of_testing):
         iterations = iterations + 1
@@ -69,7 +70,9 @@ def sym_wyz_swap(data):
                 x = (random.randrange(0, 1000))/1000
                 if x < math.exp(-dist_diff/t):
                     distance, trasa = distance2, trasa2
-        y.append(distance)
+        if best_distance > distance:
+            best_distance, best_route =distance, trasa
+        y.append(best_distance)
         t = wsp*t
     prop = (time_of_testing * 60) / len(y)
     x_data = []
@@ -78,15 +81,15 @@ def sym_wyz_swap(data):
     matplotlib.pyplot.plot(x_data, y, label = 'symulator_wyzazania z swap')
     matplotlib.pyplot.ylabel('distance')
     matplotlib.pyplot.xlabel('time[ms]')
-    print(iterations)
-    return distance,trasa
+    return best_distance,best_route
 
 def sym_wyz(data):
     iterations = 0
     distance,trasa = generate_random_route(data)
+    best_distance, best_route = distance,trasa
     y = [distance]
-    t = 3000
-    wsp = 0.80
+    t = 400000
+    wsp = 0.99
     act_time = time.time()
     while (time.time() < act_time + time_of_testing):
         iterations = iterations + 1
@@ -99,7 +102,9 @@ def sym_wyz(data):
                 x = (random.randrange(0, 1000))/1000
                 if x < math.exp(-dist_diff/t):
                     distance, trasa = distance2, trasa2
-        y.append(distance)
+        if best_distance > distance:
+            best_distance, best_route =distance, trasa
+        y.append(best_distance)
         t = wsp*t
     prop = (time_of_testing * 60) / len(y)
     x_data = []
@@ -108,8 +113,7 @@ def sym_wyz(data):
     matplotlib.pyplot.plot(x_data, y, label = 'symulator_wyzazania')
     matplotlib.pyplot.ylabel('distance')
     matplotlib.pyplot.xlabel('time[ms]')
-    print(iterations)
-    return distance,trasa
+    return best_distance,best_route
 
 def genetic_algorithm (data):
     #help functions
@@ -188,42 +192,41 @@ def genetic_algorithm (data):
     for i in range(len(y)):
         x_data.append(i * prop)
     matplotlib.pyplot.plot(x_data,y,label = 'genetic algorithm')
-    print(iterations)
+
     return population_dist[0],population_trasa[0]
 
 
-data = pd.read_csv('exp.csv',sep=";")
+data = pd.read_csv('Exp.csv',sep=";")
 np_data = np.array(data[1:-1])
 np_data_clear = np_data[:,:-2].astype(int)
-time_of_testing = 0.2 #Czas w sekundach testu
+time_of_testing = 0.1 #Czas w sekundach testu
 
 
 #Random_search
 best,route = random_search(np_data_clear)
 print("Random Search")
-print(best)
-print(route)
+print("Best distance:" + str(best))
+print("Best Route"+str(route))
 
 #GeneticAlgorithm
 
 best,route = genetic_algorithm(np_data_clear)
 print("Genetic Algorithm")
-print(best)
-print(route)
-
+print("Best distance:" + str(best))
+print("Best Route"+str(route))
 #Sym_wyz
 
 best,route = sym_wyz(np_data_clear)
 print("Symulator Wyzarzania")
-print(best)
-print(route)
+print("Best distance:" + str(best))
+print("Best Route"+str(route))
 
-#Sym_wyz
+#Sym_wyz + swapem
 
 best,route = sym_wyz_swap(np_data_clear)
 print("Symulator Wyzarzania + swap")
-print(best)
-print(route)
+print("Best distance:" + str(best))
+print("Best Route"+str(route))
 
 matplotlib.pyplot.ylim(30000, 50000)
 matplotlib.pyplot.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left',
