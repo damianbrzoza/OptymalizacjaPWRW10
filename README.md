@@ -1,6 +1,6 @@
 # TSP-optimization
 
-Analysis of different solution methods in the case of an asymmetric komivoyager problem.
+Different methods for asymmetric komivoyager problem.
 
 ## What is TSP?
 
