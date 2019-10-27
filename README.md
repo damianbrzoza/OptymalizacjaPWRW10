@@ -1,11 +1,43 @@
-# Semestr 8 - Optymalizacja Politechnika Wrocławska 
-Rozwiązanie zadań z optymalizacji.<br />
-Zadanie 1: Problem komivoyagera dla pojedynczego kierowcy<br />
-Zadanie 2: Problem komivoyagera dla dwóch kierowców<br />
-Zadanie 3: Problem przepływowy - Algorytm NEH<br />
+# TSP-optimization
 
-Zadanie pierwsze zostało rozwiązane za pomocą algorytmu genetycznego, algorytmu symulowanego wyżarzania (w dwóch wariantach) oraz random search. Działanie algorytmów zostało porównane za pomocą kryterium czasowego.
+Analysis of different solution methods in the case of an asymmetric komivoyager problem.
 
-Zadanie drugie zawiera rozwiązanie problemu dla dwóch kierowców za pomocą symulowanego wyżarzania
+## What is TSP?
 
-Zadanie trzecie zostało rozwiązane za pomocą algorytmu heurystycznego - symulowanego wyżarzania, jak i algorytmu NEH
+The travelling salesman problem (TSP) asks the following question: "Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city and returns to the origin city?" It is an NP-hard problem in combinatorial optimization, important in operations research and theoretical computer science.
+More at [Wikipedia](https://en.wikipedia.org/wiki/Travelling_salesman_problem)
+
+### Prerequisites
+
+What things you need to install the software and how to install them
+
+```
+Give examples
+```
+
+### Installing
+
+A step by step series of examples that tell you how to get a development env running
+
+Say what the step will be
+
+```
+Give the example
+```
+
+And repeat
+
+```
+until finished
+```
+
+End with an example of getting some data out of the system or using it for a little demo
+
+
+## Author
+
+* **Damian Brzoza** - [Portfolio](https://github.com/PurpleBooth)
+
+## Licence
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
