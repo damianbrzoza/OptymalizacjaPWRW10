@@ -5,21 +5,15 @@ import matplotlib.pyplot
 import time
 
 # TODO: Make some visualizations
-# TODO: Add sum of distances comparision
-# TODO: Solve bugs with huge amount of travelers
+# TODO: Add sum of distances comparision (instead of minimum criterium)
 # TODO: Make more real data generator (distance between town A and B should be
 #  lower than between town A and C + C and A)
-# TODO: Finish readme.md
 # TODO: Make report
 # TODO: Make documentation
-# TODO: Make setup file
-
-# To make every time the same result
-np.random.seed(1)
-random.seed(1)
+# TODO: Develop Genetic algorithm, new crossing methods (ranking, roulette)
 
 
-def make_random_matrix(number_of_towns: int = 16, min_distance: int = 10, max_distance: int = 100):
+def make_random_matrix(number_of_towns: int = 16, min_distance: int = 10, max_distance: int = 100) -> int:
     """
     Function to make random matrix of distances between towns
     :param number_of_towns : number of towns in matrix
@@ -31,13 +25,13 @@ def make_random_matrix(number_of_towns: int = 16, min_distance: int = 10, max_di
     :return: distance matrix
     :rtype: int
     """
-    mat = np.random.randint(low=min_distance, high=max_distance, size=(number_of_towns, number_of_towns))
+    mat = np.random.randint(low=min_distance, high=max_distance, size=(number_of_towns, number_of_towns), dtype='int32')
     for i in range(len(mat)):
         mat[i][i] = 0
     return mat
 
 
-def generate_random_route(data: np.array, number_of_drivers: int = 1, start_town: int = 0):
+def generate_random_route(data: np.array, number_of_drivers: int = 1, start_town: int = 0) -> tuple:
     """
     :param data: distance matrix
     :type data: np.array
@@ -64,28 +58,28 @@ def generate_random_route(data: np.array, number_of_drivers: int = 1, start_town
     return distances, route
 
 
-def distance_comparision(distance1: np.array, distance2: np.array, kind='min'):
+def distance_comparision(first_dist: np.array, second_dist: np.array, kind='min') -> bool:
     """
     Distance comparision function
-    :param distance1: first distance to compare
-    :type distance1: np.array
-    :param distance2: second distance to compare
-    :type distance2: np.array
+    :param first_dist: first distance to compare
+    :type first_dist: np.array
+    :param second_dist: second distance to compare
+    :type second_dist: np.array
     :param kind: type of comparision
     :type kind: str
     :return: True or False depends of which of dinstaces are "better"
     :rtype: bool
     """
-    
     to_return = False
     if kind == 'min':
-        to_return = max(distance1) < max(distance2)
+        to_return = max(first_dist) < max(second_dist)
     return to_return
 
 
 def random_search(data: np.array, test_time: float = 1, number_of_drivers: int = 1,
-                  dist_comp: str = 'min', start_town: int = 0):
+                  dist_comp: str = 'min', start_town: int = 0) -> tuple:
     """
+    Random search implementation
     :param data: distances matrix
     :type data: np.array
     :param test_time: time of testing
@@ -124,9 +118,38 @@ def random_search(data: np.array, test_time: float = 1, number_of_drivers: int =
 
 
 def simulated_annealing(data: np.array, test_time: float = 1, number_of_drivers: int = 1, start_town: int = 0,
-                        initial_temperature: float = 400000, temp_decrease_ratio: float = 0.99, use_swap: bool = True):
+                        initial_temperature: float = 400000, temp_decrease_ratio: float = 0.99,
+                        use_swap: bool = True) -> tuple:
+    """
+    Simulated Annealing implementation
+    :param data: distances matrix
+    :type data: np.array
+    :param test_time: time of testing
+    :type test_time: float
+    :param number_of_drivers: number of travelers
+    :type number_of_drivers: int
+    :param start_town: starting_town
+    :type start_town: int
+    :param initial_temperature: hyperparameter of SA
+    :type initial_temperature: float
+    :param temp_decrease_ratio: hyperparameter of SA
+    :type temp_decrease_ratio: float
+    :param use_swap: Swap two elements of route list instead of generate new random route
+    :type use_swap: bool
+    :return: tuple of best distances and routes of each travelers
+    :rtype: tuple
+    """
     
-    def swap(route, num_of_drivers: int):
+    def swap(route: list, num_of_drivers: int) -> tuple:
+        """
+        Function for swaping two elements in route list
+        :param route: list of next town destination
+        :type route: list
+        :param num_of_drivers: number of travelers
+        :type num_of_drivers: int
+        :return: new route and distance of it
+        :rtype: tuple
+        """
         new_route = []
         new_route = new_route + route
         first_index, second_index = random.sample(population=list(range(1, len(route) - 2)), k=2)
@@ -182,9 +205,35 @@ def simulated_annealing(data: np.array, test_time: float = 1, number_of_drivers:
 
 
 def genetic_algorithm(data: np.array, test_time: float = 1, number_of_drivers: int = 1, population_quantity: int = 10,
-                      start_town: int = 0):
+                      start_town: int = 0) -> tuple:
+    """
+    Genetic algorithm implementation
+    :param data: distances matrix
+    :type data: np.array
+    :param test_time: time of testing
+    :type test_time: float
+    :param number_of_drivers: number of travelers
+    :type number_of_drivers: int
+    :param population_quantity: number of instances in population
+    :type population_quantity: int
+    :param start_town: starting_town
+    :type start_town: int
+    :return: tuple of best distances and routes of each travelers
+    :rtype: tuple
+    """
     # help functions
-    def start_population(num_drivers: int, st_town: int, population_number: int):
+    def start_population(num_drivers: int, st_town: int, population_number: int) -> tuple:
+        """
+        Function to begin genetic algorithm work, initalize first population
+        :param num_drivers: number of travelers
+        :type num_drivers: int
+        :param st_town: starting_town
+        :type st_town: int
+        :param population_number: number of instances in population
+        :type population_number: int
+        :return: start population
+        :rtype: tuple
+        """
         route_population = []
         dist_population = []
         for k in range(population_number):
@@ -193,7 +242,18 @@ def genetic_algorithm(data: np.array, test_time: float = 1, number_of_drivers: i
             dist_population.append(new_dist)
         return route_population, dist_population
 
-    def crossing(first_route, second_route, num_drivers: int):
+    def crossing(first_route: list, second_route: list, num_drivers: int) -> tuple:
+        """
+        Function to crossing two routes to create new one
+        :param first_route: first route
+        :type first_route: list
+        :param second_route: second route
+        :type second_route: list
+        :param num_drivers: number of travelers
+        :type num_drivers: int
+        :return: tuple of new route and it's distance
+        :rtype: tuple
+        """
         start_crossing_index = random.randrange(len(first_route) - 2) + 1
         decision_maker = random.randrange(10)
         if decision_maker > 5:
@@ -222,15 +282,37 @@ def genetic_algorithm(data: np.array, test_time: float = 1, number_of_drivers: i
             new_distance[j] = new_distance[j] + data[new_route[k], new_route[k + 1]]
         return new_distance, new_route
 
-    def new_pop(population_number: int, num_drivers: int, st_town: int):
+    def new_pop(population_number: int, num_drivers: int, st_town: int,
+                elite_rate: float = 0.2, mutation_rate: float = 0.2) -> tuple:
+        """
+        Function to generate new population
+        :param population_number: number of instances in population
+        :type population_number: int
+        :param num_drivers: number of travelers
+        :type num_drivers: int
+        :param st_town: starting_town
+        :type st_town: int
+        :param elite_rate: rate of elite members in population, they must be in new population
+        :type elite_rate: float
+        :param mutation_rate: rate of mutated members in population
+        :type mutation_rate: float
+        :return: new population
+        :rtype: tuple
+        """
+
+        elite_quantity = int(elite_rate * population_number)
+        mutation_quantity = int(mutation_rate * population_number)
+
         # Elite
-        new_pop_dist = population_dist[0:2]
-        new_pop_route = population_route[0:2]
+        new_pop_dist = population_dist[0:elite_quantity]
+        new_pop_route = population_route[0:elite_quantity]
+
         # Mutation
-        for k in range(int(population_number/5)):
+        for _ in range(mutation_quantity):
             new_dist, new_route = generate_random_route(data=data, number_of_drivers=num_drivers, start_town=st_town)
             new_pop_dist.append(new_dist)
             new_pop_route.append(new_route)
+
         # Random cross for others
         while not (len(new_pop_dist) == len(population_dist)):
             c = random.randrange(len(population_route))
@@ -271,14 +353,23 @@ def genetic_algorithm(data: np.array, test_time: float = 1, number_of_drivers: i
     return population_dist[0], population_route[0]
 
 
-dt = make_random_matrix(number_of_towns=15)
-drivers = 2
-t_time = 1
-town = 1
-_, _ = random_search(dt, number_of_drivers=drivers, test_time=t_time, start_town=town)
-_, _ = simulated_annealing(dt, number_of_drivers=drivers, test_time=t_time, start_town=town)
-_, _ = simulated_annealing(dt, number_of_drivers=drivers, use_swap=False, test_time=t_time, start_town=town)
-_, _ = genetic_algorithm(dt, number_of_drivers=drivers, test_time=t_time, start_town=town)
+def main():
+    # To make every time the same result
+    np.random.seed(1)
+    random.seed(1)
 
-matplotlib.pyplot.legend(loc='upper right', ncol=1)
-matplotlib.pyplot.show()
+    dt = make_random_matrix(number_of_towns=100)
+    drivers = 2
+    t_time = 1
+    town = 1
+    _, _ = random_search(dt, number_of_drivers=drivers, test_time=t_time, start_town=town)
+    _, _ = simulated_annealing(dt, number_of_drivers=drivers, test_time=t_time, start_town=town)
+    _, _ = simulated_annealing(dt, number_of_drivers=drivers, use_swap=False, test_time=t_time, start_town=town)
+    _, _ = genetic_algorithm(dt, number_of_drivers=drivers, test_time=t_time, start_town=town)
+
+    matplotlib.pyplot.legend(loc='upper right', ncol=1)
+    matplotlib.pyplot.show()
+
+
+if __name__ == "__main__":
+    main()
