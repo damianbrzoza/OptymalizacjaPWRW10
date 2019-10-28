@@ -1,0 +1,276 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TSP module &#8212; TSP-optimization  documentation</title>
+    <link rel="stylesheet" href="_static/graphite.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="TSP-OPTIMIZATION documentation" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="TSP-OPTIMIZATION documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TSP-optimization  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tsp-module">
+<h1>TSP module<a class="headerlink" href="#tsp-module" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<span class="target" id="module-tsp"></span><dl class="function">
+<dt id="tsp.main">
+<code class="descclassname">tsp.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tsp.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tsp.main" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<ul class="last simple">
+<li>TODO: Make some visualizations</li>
+<li>TODO: Add sum of distances comparision (instead of minimum criterium)</li>
+<li>TODO: Real data generator (distance between town A and B should be lower than between town A and C + C and A)</li>
+<li>TODO: Make report</li>
+<li>TODO: Develop Genetic algorithm, new crossing methods (ranking, roulette)</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tsp.generate_random_route">
+<code class="descclassname">tsp.</code><code class="descname">generate_random_route</code><span class="sig-paren">(</span><em>data: numpy.array</em>, <em>number_of_drivers: int = 1</em>, <em>start_town: int = 0</em><span class="sig-paren">)</span> &#x2192; tuple<a class="reference internal" href="_modules/tsp.html#generate_random_route"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tsp.generate_random_route" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function which generate random route</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>np.array</em>) – distance matrix</li>
+<li><strong>number_of_drivers</strong> (<em>int</em>) – number of travelers/drivers</li>
+<li><strong>start_town</strong> (<em>int</em>) – index of starting town</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">tuple of distances and routes of each travelers</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tsp.make_random_matrix">
+<code class="descclassname">tsp.</code><code class="descname">make_random_matrix</code><span class="sig-paren">(</span><em>number_of_towns: int = 16</em>, <em>min_distance: int = 10</em>, <em>max_distance: int = 100</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="_modules/tsp.html#make_random_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tsp.make_random_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to make random matrix of distances between town</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>number_of_towns</strong> (<em>int</em>) – number of towns in matrix</li>
+<li><strong>min_distance</strong> (<em>int</em>) – minimal distance between towns</li>
+<li><strong>max_distance</strong> (<em>int</em>) – maximum distance between towns</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">distance matrix</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tsp.distance_comparision">
+<code class="descclassname">tsp.</code><code class="descname">distance_comparision</code><span class="sig-paren">(</span><em>first_dist: numpy.array</em>, <em>second_dist: numpy.array</em>, <em>kind='min'</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/tsp.html#distance_comparision"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tsp.distance_comparision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Distance comparision function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>first_dist</strong> (<em>np.array</em>) – first distance to compare</li>
+<li><strong>second_dist</strong> (<em>np.array</em>) – second distance to compare</li>
+<li><strong>kind</strong> (<em>str</em>) – type of comparision</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True or False depends of which of dinstaces are “better”</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tsp.random_search">
+<code class="descclassname">tsp.</code><code class="descname">random_search</code><span class="sig-paren">(</span><em>data: numpy.array</em>, <em>test_time: float = 1</em>, <em>number_of_drivers: int = 1</em>, <em>dist_comp: str = 'min'</em>, <em>start_town: int = 0</em><span class="sig-paren">)</span> &#x2192; tuple<a class="reference internal" href="_modules/tsp.html#random_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tsp.random_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Random search implementation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>np.array</em>) – distances matrix</li>
+<li><strong>test_time</strong> (<em>float</em>) – time of testing</li>
+<li><strong>number_of_drivers</strong> (<em>int</em>) – number of travelers</li>
+<li><strong>dist_comp</strong> (<em>str</em>) – type of distance comparision</li>
+<li><strong>start_town</strong> (<em>int</em>) – starting_town</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">tuple of best distances and routes of each travelers</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tsp.simulated_annealing">
+<code class="descclassname">tsp.</code><code class="descname">simulated_annealing</code><span class="sig-paren">(</span><em>data: numpy.array</em>, <em>test_time: float = 1</em>, <em>number_of_drivers: int = 1</em>, <em>start_town: int = 0</em>, <em>initial_temperature: float = 400000</em>, <em>temp_decrease_ratio: float = 0.99</em>, <em>use_swap: bool = True</em><span class="sig-paren">)</span> &#x2192; tuple<a class="reference internal" href="_modules/tsp.html#simulated_annealing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tsp.simulated_annealing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulated Annealing implementation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>np.array</em>) – distances matrix</li>
+<li><strong>test_time</strong> (<em>float</em>) – time of testing</li>
+<li><strong>number_of_drivers</strong> (<em>int</em>) – number of travelers</li>
+<li><strong>start_town</strong> (<em>int</em>) – starting_town</li>
+<li><strong>initial_temperature</strong> (<em>float</em>) – hyperparameter of SA</li>
+<li><strong>temp_decrease_ratio</strong> (<em>float</em>) – hyperparameter of SA</li>
+<li><strong>use_swap</strong> (<em>bool</em>) – Swap two elements of route list instead of generate new random route</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">tuple of best distances and routes of each travelers</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tsp.genetic_algorithm">
+<code class="descclassname">tsp.</code><code class="descname">genetic_algorithm</code><span class="sig-paren">(</span><em>data: numpy.array</em>, <em>test_time: float = 1</em>, <em>number_of_drivers: int = 1</em>, <em>population_quantity: int = 10</em>, <em>start_town: int = 0</em><span class="sig-paren">)</span> &#x2192; tuple<a class="reference internal" href="_modules/tsp.html#genetic_algorithm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tsp.genetic_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Genetic algorithm implementation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>np.array</em>) – distances matrix</li>
+<li><strong>test_time</strong> (<em>float</em>) – time of testing</li>
+<li><strong>number_of_drivers</strong> (<em>int</em>) – number of travelers</li>
+<li><strong>population_quantity</strong> (<em>int</em>) – number of instances in population</li>
+<li><strong>start_town</strong> (<em>int</em>) – starting_town</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">tuple of best distances and routes of each travelers</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><a class="reference internal" href="index.html#mastertoc"><span class="std std-ref">Return Home</span></a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/project-1.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">TSP-Optimization</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TSP module</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="TSP-OPTIMIZATION documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TSP-optimization  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Damian Brzoza.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>
