@@ -13,7 +13,7 @@ Documentation is available at [GithubPages](https://damianbrzoza.github.io/TSP-o
 
 ## Author
 
-* **Damian Brzoza** - [Portfolio](https://github.com/PurpleBooth)
+* **Damian Brzoza** - [Portfolio](https://damianbrzoza.github.io/)
 
 ## Licence
 
